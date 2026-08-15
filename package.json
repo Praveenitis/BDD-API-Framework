@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+  "test": "cucumber-js",
+  "test:smoke": "cucumber-js --tags '@smoke'",
+  "test:api": "cucumber-js --tags '@api'",
+  "test:hybrid": "cucumber-js --tags '@hybrid'"
+},
   "keywords": [],
   "author": "",
   "license": "ISC",
