@@ -1,9 +1,12 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const assert = require('assert');
 
+const AuthService = require('../api/authService');
+
 let credentials;
 let response;
-let responseBody;
+
+const authService = new AuthService();
 
 Given('valid admin credentials', function () {
 
@@ -16,22 +19,17 @@ Given('valid admin credentials', function () {
 
 When('I send an authentication request', async function () {
 
-    response = await fetch('https://automationintesting.online/api/auth/login', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(credentials)
-    });
-
-    responseBody = await response.text();
+    response = await authService.login(credentials);
 
     console.log('Status:', response.status);
-    console.log('Response:', responseBody);
+    console.log('Response:', response.body);
+
 });
 
 Then('an authentication token should be generated', function () {
 
     assert.strictEqual(response.status, 200);
+
+    assert.ok(response.body.token);
 
 });
