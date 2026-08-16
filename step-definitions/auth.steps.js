@@ -30,6 +30,6 @@ Then('an authentication token should be generated', function () {
 
     assert.strictEqual(response.status, 200);
 
-    assert.ok(response.body.token);
+    assert.ok(authService.getToken());
 
 });
