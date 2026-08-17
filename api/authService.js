@@ -9,22 +9,21 @@ class AuthService {
         this.baseUrl = 'https://automationintesting.online/api';
     }
 
-    async login(credentials) {
+   async login(credentials) {
 
-        const response = await this.apiClient.sendRequest(
-            'POST',
-            `${this.baseUrl}/auth/login`,
-            {
-                body: credentials
-            }
-        );
-
-        if (response.status === 200 && response.body.token) {
-            this.tokenManager.setToken(response.body.token);
+    const response = await this.apiClient.post(
+        `${this.baseUrl}/auth/login`,
+        {
+            body: credentials
         }
+    );
 
-        return response;
+    if (response.status === 200 && response.body.token) {
+        this.tokenManager.setToken(response.body.token);
     }
+
+    return response;
+}
 
     getToken() {
         return this.tokenManager.getToken();
