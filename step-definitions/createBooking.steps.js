@@ -97,3 +97,94 @@ Then('the created booking details should be correct', function () {
     );
 
 });
+
+When('I update the created booking', async function () {
+
+    const currentBooking =
+        await this.bookingService.getBooking(this.bookingId);
+
+    this.updatedBookingData = {
+        ...currentBooking.body,
+
+        firstname: 'AlexUpdated',
+        lastname: 'UpdatedUser',
+        totalprice: 500,
+        depositpaid: false,
+        additionalneeds: 'Lunch'
+    };
+
+    console.log(
+        'Update Booking Request:',
+        JSON.stringify(this.updatedBookingData, null, 2)
+    );
+
+    this.response =
+        await this.bookingService.updateBooking(
+            this.bookingId,
+            this.updatedBookingData
+        );
+
+    console.log(
+        'Update Booking Status:',
+        this.response.status
+    );
+
+    console.log(
+        'Update Booking Response:',
+        JSON.stringify(this.response.body, null, 2)
+    );
+});
+
+Then('the booking should be updated successfully', function () {
+
+    assert.strictEqual(this.response.status, 200);
+
+});
+
+When('I retrieve the updated booking', async function () {
+
+    this.response = await this.bookingService.getBooking(
+        this.bookingId
+    );
+
+    console.log(
+        'Updated Booking GET Status:',
+        this.response.status
+    );
+
+    console.log(
+        'Updated Booking GET Response:',
+        this.response.body
+    );
+});
+
+Then('the updated booking details should be correct', function () {
+
+    assert.strictEqual(this.response.status, 200);
+
+    assert.strictEqual(
+        this.response.body.firstname,
+        this.updatedBookingData.firstname
+    );
+
+    assert.strictEqual(
+        this.response.body.lastname,
+        this.updatedBookingData.lastname
+    );
+
+    assert.strictEqual(
+        this.response.body.depositpaid,
+        this.updatedBookingData.depositpaid
+    );
+
+    assert.strictEqual(
+        this.response.body.roomid,
+        this.updatedBookingData.roomid
+    );
+
+    assert.deepStrictEqual(
+        this.response.body.bookingdates,
+        this.updatedBookingData.bookingdates
+    );
+
+});
