@@ -41,6 +41,17 @@ async getBooking(id) {
         }
     );
 }
+
+async updateBooking(id, bookingData) {
+
+    return await this.apiClient.put(
+        `${this.baseUrl}/booking/${id}`,
+        {
+            headers: this.authService.getAuthHeaders(),
+            body: bookingData
+        }
+    );
+}
 }
 
 module.exports = BookingService;
