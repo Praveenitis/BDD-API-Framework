@@ -10,19 +10,16 @@ class BookingService {
 
     async getBookings() {
 
-    const token = this.authService.getToken();
-
     return await this.apiClient.get(
-    `${this.baseUrl}/booking/`,
-    {
-        headers: {
-            Cookie: `token=${token}`
-        },
-        queryParams: {
-            roomid: 1
+        `${this.baseUrl}/booking/`,
+        {
+            headers: this.authService.getAuthHeaders(),
+
+            queryParams: {
+                roomid: 1
+            }
         }
-    }
-);
+    );
 }
 }
 
