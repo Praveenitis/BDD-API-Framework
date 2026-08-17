@@ -6,6 +6,26 @@ class ApiClient {
         };
     }
 
+    get(endpoint, options = {}) {
+    return this.sendRequest('GET', endpoint, options);
+}
+
+post(endpoint, options = {}) {
+    return this.sendRequest('POST', endpoint, options);
+}
+
+put(endpoint, options = {}) {
+    return this.sendRequest('PUT', endpoint, options);
+}
+
+patch(endpoint, options = {}) {
+    return this.sendRequest('PATCH', endpoint, options);
+}
+
+delete(endpoint, options = {}) {
+    return this.sendRequest('DELETE', endpoint, options);
+}
+
     async sendRequest(method, endpoint, options = {}) {
 
         const {
