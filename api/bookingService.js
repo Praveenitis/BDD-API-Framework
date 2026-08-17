@@ -52,6 +52,27 @@ async updateBooking(id, bookingData) {
         }
     );
 }
+
+async patchBooking(id, bookingData) {
+
+    return await this.apiClient.patch(
+        `${this.baseUrl}/booking/${id}`,
+        {
+            headers: this.authService.getAuthHeaders(),
+            body: bookingData
+        }
+    );
+}
+
+async deleteBooking(id) {
+
+    return await this.apiClient.delete(
+        `${this.baseUrl}/booking/${id}`,
+        {
+            headers: this.authService.getAuthHeaders()
+        }
+    );
+}
 }
 
 module.exports = BookingService;
