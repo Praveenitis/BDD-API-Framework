@@ -12,18 +12,17 @@ class BookingService {
 
     const token = this.authService.getToken();
 
-    return await this.apiClient.sendRequest(
-        'GET',
-        `${this.baseUrl}/booking/`,
-        {
-            headers: {
-                Cookie: `token=${token}`
-            },
-            queryParams: {
-                roomid: 1
-            }
+    return await this.apiClient.get(
+    `${this.baseUrl}/booking/`,
+    {
+        headers: {
+            Cookie: `token=${token}`
+        },
+        queryParams: {
+            roomid: 1
         }
-    );
+    }
+);
 }
 }
 
