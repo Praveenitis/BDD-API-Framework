@@ -10,18 +10,21 @@ class BookingService {
 
     async getBookings() {
 
-        const token = this.authService.getToken();
+    const token = this.authService.getToken();
 
-        return await this.apiClient.sendRequest(
-            'GET',
-            `${this.baseUrl}/booking/?roomid=1`,
-            {
-                headers: {
-                    Cookie: `token=${token}`
-                }
+    return await this.apiClient.sendRequest(
+        'GET',
+        `${this.baseUrl}/booking/`,
+        {
+            headers: {
+                Cookie: `token=${token}`
+            },
+            queryParams: {
+                roomid: 1
             }
-        );
-    }
+        }
+    );
+}
 }
 
 module.exports = BookingService;
