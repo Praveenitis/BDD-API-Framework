@@ -188,3 +188,50 @@ Then('the updated booking details should be correct', function () {
     );
 
 });
+
+When('I delete the created booking', async function () {
+
+    this.response = await this.bookingService.deleteBooking(
+        this.bookingId
+    );
+
+    console.log(
+        'Delete Booking Status:',
+        this.response.status
+    );
+
+    console.log(
+        'Delete Booking Response:',
+        JSON.stringify(this.response.body, null, 2)
+    );
+});
+
+Then('the booking should be deleted successfully', function () {
+
+    assert.strictEqual(this.response.status, 202);
+
+});
+
+When('I try to retrieve the deleted booking', async function () {
+
+    this.response = await this.bookingService.getBooking(
+        this.bookingId
+    );
+
+    console.log(
+        'Deleted Booking GET Status:',
+        this.response.status
+    );
+
+    console.log(
+        'Deleted Booking GET Response:',
+        JSON.stringify(this.response.body, null, 2)
+    );
+});
+
+Then('the deleted booking should not be found', function () {
+
+    assert.strictEqual(this.response.status, 404);
+
+});
+
