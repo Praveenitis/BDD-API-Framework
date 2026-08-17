@@ -31,6 +31,16 @@ async createBooking(bookingData) {
         }
     );
 }
+
+async getBooking(id) {
+
+    return await this.apiClient.get(
+        `${this.baseUrl}/booking/${id}`,
+        {
+            headers: this.authService.getAuthHeaders()
+        }
+    );
+}
 }
 
 module.exports = BookingService;
