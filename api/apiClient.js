@@ -1,36 +1,70 @@
 class ApiClient {
 
+    constructor() {
+        this.defaultHeaders = {
+            'Content-Type': 'application/json'
+        };
+    }
+
     async sendRequest(method, endpoint, options = {}) {
 
         const {
             headers = {},
+            queryParams,
             body
         } = options;
 
-        const response = await fetch(endpoint, {
+        const url = this.buildUrl(endpoint, queryParams);
+
+        const requestHeaders = {
+            ...this.defaultHeaders,
+            ...headers
+        };
+
+        const startTime = Date.now();
+
+        const response = await fetch(url, {
             method,
-            headers: {
-                'Content-Type': 'application/json',
-                ...headers
-            },
+            headers: requestHeaders,
             body: body ? JSON.stringify(body) : undefined
         });
 
-        let responseBody;
+        const responseTime = Date.now() - startTime;
 
-        const contentType = response.headers.get('content-type');
-
-        if (contentType && contentType.includes('application/json')) {
-            responseBody = await response.json();
-        } else {
-            responseBody = await response.text();
-        }
+        const responseBody = await this.parseResponse(response);
 
         return {
             status: response.status,
             headers: response.headers,
-            body: responseBody
+            body: responseBody,
+            responseTime
         };
+    }
+
+    buildUrl(endpoint, queryParams) {
+
+        if (!queryParams) {
+            return endpoint;
+        }
+
+        const url = new URL(endpoint);
+
+        Object.entries(queryParams).forEach(([key, value]) => {
+            url.searchParams.append(key, value);
+        });
+
+        return url.toString();
+    }
+
+    async parseResponse(response) {
+
+        const contentType = response.headers.get('content-type');
+
+        if (contentType && contentType.includes('application/json')) {
+            return await response.json();
+        }
+
+        return await response.text();
     }
 }
 
