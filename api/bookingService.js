@@ -21,6 +21,16 @@ class BookingService {
         }
     );
 }
+
+async createBooking(bookingData) {
+
+    return await this.apiClient.post(
+        `${this.baseUrl}/booking/`,
+        {
+            body: bookingData
+        }
+    );
+}
 }
 
 module.exports = BookingService;
