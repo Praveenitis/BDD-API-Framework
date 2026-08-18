@@ -5,7 +5,9 @@ module.exports = {
             './hooks/**/*.js'
         ],
         format: [
-            'progress'
+            'progress',
+            'html:reports/cucumber-report.html',
+    'json:reports/cucumber-report.json'
         ],
         timeout: 15000
     }
