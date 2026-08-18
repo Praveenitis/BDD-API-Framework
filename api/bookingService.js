@@ -1,11 +1,12 @@
 const ApiClient = require('./apiClient');
+const environment = require('../config/environment');
 
 class BookingService {
 
     constructor(authService) {
         this.apiClient = new ApiClient();
         this.authService = authService;
-        this.baseUrl = 'https://automationintesting.online/api';
+        this.baseUrl = environment.baseUrl;
     }
 
     async getBookings() {
