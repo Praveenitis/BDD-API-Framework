@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
   "test": "cucumber-js",
-  "test:smoke": "cucumber-js --tags '@smoke'",
-  "test:api": "cucumber-js --tags '@api'",
-  "test:hybrid": "cucumber-js --tags '@hybrid'"
+  "test:smoke": "cucumber-js --tags \"@smoke\"",
+  "test:api": "cucumber-js --tags \"@api\"",
+  "test:hybrid": "cucumber-js --tags \"@hybrid\""
 },
   "keywords": [],
   "author": "",
