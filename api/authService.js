@@ -1,6 +1,7 @@
 const ApiClient = require('./apiClient');
 const TokenManager = require('./tokenManager');
 const AuthContext = require('./authContext');
+const environment = require('../config/environment');
 
 class AuthService {
 
@@ -10,7 +11,7 @@ class AuthService {
         this.tokenManager = new TokenManager();
         this.authContext = new AuthContext();
 
-        this.baseUrl = 'https://automationintesting.online/api';
+        this.baseUrl = environment.baseUrl;
     }
 
     async login(credentials) {
