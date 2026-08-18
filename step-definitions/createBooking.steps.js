@@ -3,6 +3,7 @@ const assert = require('assert');
 const TestDataFactory = require('../utils/testDataFactory');
 const RoomService = require('../api/roomService');
 const AvailabilityHelper = require('../utils/availabilityHelper');
+const environment = require('../config/environment');
 
 
 const BookingService = require('../api/bookingService');
@@ -15,7 +16,7 @@ let response;
 
 When('I create a new booking', async function () {
 
-    this.bookingService = new BookingService(this.authService);
+    
 
     const roomService = new RoomService(this.authService);
 
@@ -30,7 +31,7 @@ When('I create a new booking', async function () {
     'Booking Summary Response:',
     JSON.stringify(summaryResponse.body, null, 2)
 );
-    const roomId = 1;
+    const roomId = environment.roomId;
 
 const availableDates =
     AvailabilityHelper.findAvailableDates(
