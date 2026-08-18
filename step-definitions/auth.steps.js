@@ -1,39 +1,34 @@
 const { Given, When, Then } = require('@cucumber/cucumber');
 const assert = require('assert');
+const environment = require('../config/environment');
 
-const AuthService = require('../api/authService');
-
-let credentials;
-let response;
-
-const authService = new AuthService();
 
 Given('valid admin credentials', function () {
 
-    credentials = {
-        username: 'admin',
-        password: 'password'
-    };
+    this.credentials = environment.adminCredentials;
 
 });
+
 
 When(
     'I send an authentication request',
     { timeout: 15000 },
     async function () {
 
-        response = await authService.login(credentials);
+        this.response = await this.authService.login(
+            this.credentials
+        );
 
-        console.log('Status:', response.status);
-        console.log('Response:', response.body);
+        
 
     }
 );
 
+
 Then('an authentication token should be generated', function () {
 
-    assert.strictEqual(response.status, 200);
+    assert.strictEqual(this.response.status, 200);
 
-    assert.ok(authService.getToken());
+    assert.ok(this.authService.getToken());
 
 });
