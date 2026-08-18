@@ -30,3 +30,10 @@ jobs:
 
       - name: Run API automation tests
         run: npm run test:api
+
+      - name: Upload Cucumber reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-reports
+          path: reports/
