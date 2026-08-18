@@ -5,7 +5,7 @@ const BookingService = require('../api/bookingService');
 
 When('I retrieve the bookings', async function () {
 
-    this.bookingService = new BookingService(this.authService);
+    //this.bookingService = new BookingService(this.authService);
 
     this.response = await this.bookingService.getBookings();
 
