@@ -1,4 +1,4 @@
-@api
+@api @smoke
 Feature: Booking API
 
   Scenario: Retrieve bookings with valid authentication
