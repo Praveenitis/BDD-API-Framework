@@ -1,3 +1,4 @@
+const Logger = require('../utils/logger');
 class ApiClient {
 
     constructor() {
@@ -42,6 +43,9 @@ delete(endpoint, options = {}) {
         };
 
         const startTime = Date.now();
+        Logger.info(
+    `${method} ${url}`
+);
 
         const response = await fetch(url, {
             method,
@@ -50,6 +54,10 @@ delete(endpoint, options = {}) {
         });
 
         const responseTime = Date.now() - startTime;
+
+        Logger.info(
+    `${method} ${url} → ${response.status} (${responseTime}ms)`
+);
 
         const responseBody = await this.parseResponse(response);
 
