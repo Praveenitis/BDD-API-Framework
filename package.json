@@ -1,7 +1,7 @@
 {
-  "name": "bdd-api-framwork",
+  "name": "bdd-api-framework",
   "version": "1.0.0",
-  "description": "",
+  "description": "Advanced BDD-based API and UI automation framework using Cucumber, Playwright, and GitHub Actions",
   "main": "index.js",
   "scripts": {
   "test": "cucumber-js",
@@ -9,8 +9,16 @@
   "test:api": "cucumber-js --tags \"@api\"",
   "test:hybrid": "cucumber-js --tags \"@hybrid\""
 },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+  "api-testing",
+  "ui-automation",
+  "bdd",
+  "cucumber",
+  "playwright",
+  "automation-testing",
+  "sdet"
+  ],
+  "author": "Praveen",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
