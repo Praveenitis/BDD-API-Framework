@@ -1,9 +1,16 @@
 
-# Playwright
+# Dependencies
 node_modules/
+
+# Environment variables
 .env
-/test-results/
+
+# Cucumber reports
+reports/*.html
 reports/*.json
+
+# Playwright reports
+/test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
